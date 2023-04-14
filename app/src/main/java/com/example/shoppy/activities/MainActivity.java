@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         STEP 14: BẮT EVENT CHUYỂN MÀN CHO RECYCLE VIEW ĐIỆN THOẠI
         STEP 15: ĐỔ DATA CHO LAPTOP
         STEP 16: GIAO DIỆN CHI TIẾT SẢN PHẨM
+        STEP 17: ĐẨY DATA VÀO MÀN HÌNH CHI TIẾT
+        STEP 18: THÊM SP VÀO GIỎ HÀNG
      */
     Toolbar toolbar;
     ViewFlipper viewFlipper;
@@ -90,19 +92,19 @@ public class MainActivity extends AppCompatActivity {
         listViewMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 0:
-                        Intent trangChu = new Intent(getApplicationContext(),MainActivity.class);
+                        Intent trangChu = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(trangChu);
                         break;
                     case 1:
-                        Intent dienThoai = new Intent(getApplicationContext(),MobileActivity.class);
-                        dienThoai.putExtra("loai",1);
+                        Intent dienThoai = new Intent(getApplicationContext(), MobileActivity.class);
+                        dienThoai.putExtra("loai", 1);
                         startActivity(dienThoai);
                         break;
                     case 2:
-                        Intent laptop = new Intent(getApplicationContext(),MobileActivity.class);
-                        laptop.putExtra("loai",2);//STEP 14
+                        Intent laptop = new Intent(getApplicationContext(), MobileActivity.class);
+                        laptop.putExtra("loai", 2);//STEP 14
                         startActivity(laptop);
                         break;
                 }
@@ -195,9 +197,14 @@ public class MainActivity extends AppCompatActivity {
         //Khởi tạo list
         mangLoaiSp = new ArrayList<>();
         mangSpMoi = new ArrayList<>();
-//        //Khởi tạo Adapter
+//        Khởi tạo Adapter
 //        loaiSpAdapter = new LoaiSpAdapter(getApplicationContext(), mangLoaiSps);
 //        lvMain.setAdapter(loaiSpAdapter);
+        //STEP 18:
+        if(Ultils.mangGioHang == null){
+            Ultils.mangGioHang = new ArrayList<>();
+        }
+
     }
 
     //STEP 5:

@@ -8,11 +8,31 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarChiTiet"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="#E4DE11"
+        app:title="Chi tiết sản phẩm"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Chi tiết sản phẩm" />
+        android:background="#BDBDA5"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <FrameLayout
+            android:layout_width="55dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp">
+
+            <com.nex3z.notificationbadge.NotificationBadge
+                android:id="@+id/menu_soLuong"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="top|right" />
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/ic_cart" />
+        </FrameLayout>
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/layout1"
@@ -55,14 +75,14 @@
                 android:textStyle="bold" />
 
             <Spinner
-                android:gravity="center"
                 android:id="@+id/spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/spinner" />
+                android:background="@drawable/spinner"
+                android:gravity="center" />
 
             <Button
                 android:id="@+id/btnThemGioHang"
