@@ -3,10 +3,12 @@ package com.example.shoppy.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -83,9 +85,15 @@ public class ChiTietActivity extends AppCompatActivity {
             gioHang.setHinhSp(sanPhamMoi.getHinhanh());
             Ultils.mangGioHang.add(gioHang);
         }
-        badge.setText(String.valueOf(Ultils.mangGioHang.size()));
+        //FIX ĐẾM SỐ LƯỢNG SẢN PHẨM(KHÔNG PHẢI LOẠI)
+        int totalItem = 0;
+        for(int i=0; i<Ultils.mangGioHang.size(); i++){
+            totalItem = totalItem + Ultils.mangGioHang.get(i).getSoLuong();
+        }
+        badge.setText(String.valueOf(totalItem));
         //ĐOẠN NÀY CHỈ ĐẾM SỐ SP KHÁC NHAU THÊM VÀO
 //        badge.setText(String.valueOf(Ultils.mangGioHang.get());
+
     }
 
     private void initData() {
@@ -110,8 +118,21 @@ public class ChiTietActivity extends AppCompatActivity {
         toolbarChiTiet = findViewById(R.id.toolbarChiTiet);
         //STEP 18:
         badge = findViewById(R.id.menu_soLuong);
+        FrameLayout frameLayoutGioHang = findViewById(R.id.frameGioHang);
+        frameLayoutGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent giohang= new Intent(getApplicationContext(),GioHangActivity.class);
+                startActivity(giohang);
+            }
+        });
         if(Ultils.mangGioHang !=null){
-            badge.setText(String.valueOf(Ultils.mangGioHang.size()));
+            //FIX ĐẾM SỐ LƯỢNG SẢN PHẨM(KHÔNG PHẢI LOẠI)
+            int totalItem = 0;
+            for(int i=0; i<Ultils.mangGioHang.size(); i++){
+                totalItem = totalItem + Ultils.mangGioHang.get(i).getSoLuong();
+            }
+            badge.setText(String.valueOf(totalItem));
         }
     }
 

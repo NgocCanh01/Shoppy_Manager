@@ -21,6 +21,13 @@
         android:theme="@style/Theme.Shoppy"
         tools:targetApi="33">
         <activity
+            android:name=".activities.GioHangActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activities.MobileActivity"
             android:exported="false">
             <meta-data

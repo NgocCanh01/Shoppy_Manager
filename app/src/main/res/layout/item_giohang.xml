@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="8dp"
+    app:cardCornerRadius="4dp"
+    android:layout_margin="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img_item_giohang"
+            android:scaleType="centerCrop"
+            android:src="@drawable/iconnew"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:id="@+id/tv_item_giohang_tensp"
+                android:text="Tên sản phẩm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:weightSum="18"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="6"
+                    android:id="@+id/tv_item_giohang_gia"
+                    android:text="15000"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/red"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:src="@drawable/ic_remove"
+                    android:id="@+id/img_item_giohang_tru"
+
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_item_giohang_soluong"
+                    android:text="1"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:src="@drawable/ic_add"
+                    android:id="@+id/img_item_giohang_cong"
+                    android:layout_weight="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:src="@drawable/ic_equal"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_item_giohang_giasp2"
+                    android:text="25 000đ"
+                    android:textColor="@color/red"
+                    android:gravity="center|center_vertical"
+                    android:textStyle="bold"
+                    android:layout_weight="6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

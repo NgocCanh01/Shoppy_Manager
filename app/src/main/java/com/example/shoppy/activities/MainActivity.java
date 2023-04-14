@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ import com.example.shoppy.retrofit.ApiBanHang;
 import com.example.shoppy.retrofit.RetrofitClient;
 import com.example.shoppy.ultils.Ultils;
 import com.google.android.material.navigation.NavigationView;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         STEP 16: GIAO DIỆN CHI TIẾT SẢN PHẨM
         STEP 17: ĐẨY DATA VÀO MÀN HÌNH CHI TIẾT
         STEP 18: THÊM SP VÀO GIỎ HÀNG
+        STEP 19 20 21: GIAO DIỆN MÀN HÌNH GIỎ HÀNG, ĐẨY DATA VÀO MÀN HÌNH GIỎ HÀNG, TĂNG GIẢM TỔNG TIỀN GIỎ HÀNG
      */
     Toolbar toolbar;
     ViewFlipper viewFlipper;
@@ -66,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
     ApiBanHang apiBanHang;
     List<SanPhamMoi> mangSpMoi;
     SanPhamMoiAdapter spAdapter;
+    NotificationBadge badge;
+    FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,6 +197,8 @@ public class MainActivity extends AppCompatActivity {
         listViewMain = findViewById(R.id.lvMain);
         navigationView = findViewById(R.id.nvMain);
         drawerLayout = findViewById(R.id.drawerLayoutMain);
+        badge = findViewById(R.id.menu_soLuong);
+        frameLayout = findViewById(R.id.frameGioHang);
 
         //STEP 2:
         //Khởi tạo list
@@ -203,8 +210,32 @@ public class MainActivity extends AppCompatActivity {
         //STEP 18:
         if(Ultils.mangGioHang == null){
             Ultils.mangGioHang = new ArrayList<>();
+        }else{
+            //STEP 20 21
+            int totalItem = 0;
+            for(int i=0; i<Ultils.mangGioHang.size(); i++){
+                totalItem = totalItem + Ultils.mangGioHang.get(i).getSoLuong();
+            }
+            badge.setText(String.valueOf(totalItem));
         }
+        frameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent giohang = new Intent(getApplicationContext(),GioHangActivity.class);
+                startActivity(giohang);
+            }
+        });
 
+    }
+    //STEP 20 21:
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int totalItem = 0;
+        for(int i=0; i<Ultils.mangGioHang.size(); i++){
+            totalItem = totalItem + Ultils.mangGioHang.get(i).getSoLuong();
+        }
+        badge.setText(String.valueOf(totalItem));
     }
 
     //STEP 5:
