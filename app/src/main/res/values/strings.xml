@@ -4,4 +4,6 @@
     <string name="facebook_app_id">1234</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">56789</string>
+    <string name="them_vo_gio_hang">Thêm vào giỏ hàng</string>
+    <string name="gia_25000">Giá: 25000 đ</string>
 </resources>
