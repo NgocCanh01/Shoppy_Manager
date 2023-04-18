@@ -20,9 +20,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import io.paperdb.Paper;
+
 public class LoginActivity extends AppCompatActivity {
 
-    TextView createNewAccount;
+    TextView createNewAccount,forgotPassword;
     EditText inputEmail, inputPassword;
     Button btnLogin;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseUser mUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,15 +43,31 @@ public class LoginActivity extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        //THÊM
+        Paper.init(this);
+
         inputEmail = findViewById(R.id.inputEmail);
         inputPassword = findViewById(R.id.inputPassword);
         btnLogin = findViewById(R.id.btnLogin);
+        forgotPassword = findViewById(R.id.forgotPassword);//
 
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
+        //thêm
+        if(Paper.book().read("email")!=null&&Paper.book().read("password")!=null){
+            inputEmail.setText(Paper.book().read("email"));
+            inputPassword.setText(Paper.book().read("password"));
+        }
 
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent quenMatKhau = new Intent(LoginActivity.this,ResetPasswordActivity.class);
+                startActivity(quenMatKhau);
+            }
+        });
 
 
         createNewAccount.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +94,9 @@ public class LoginActivity extends AppCompatActivity {
         } else if (password.isEmpty() || password.length() < 6) {
             inputPassword.setError("Enter Proper Password");
         } else {
+
+            Paper.book().write("email",email);
+            Paper.book().write("password",password);
 
             progressDialog.setMessage("Please wait while Login .....");
             progressDialog.setTitle("Registration");

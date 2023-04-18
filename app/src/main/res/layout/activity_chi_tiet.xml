@@ -8,9 +8,10 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarChiTiet"
+        app:titleTextColor="@color/white"
         app:title="Chi tiết sản phẩm"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="#BDBDA5"
+        android:background="@color/appbar_color"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 

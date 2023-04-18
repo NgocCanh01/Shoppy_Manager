@@ -21,6 +21,13 @@
         android:theme="@style/Theme.Shoppy"
         tools:targetApi="33">
         <activity
+            android:name=".activities.ThanhToanActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activities.GioHangActivity"
             android:exported="false">
             <meta-data
@@ -84,7 +91,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -97,7 +104,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.MainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

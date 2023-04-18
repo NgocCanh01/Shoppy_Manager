@@ -146,4 +146,17 @@ public class ChiTietActivity extends AppCompatActivity {
             }
         });
     }
+    //STEP 22:
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(Ultils.mangGioHang !=null){
+            //FIX ĐẾM SỐ LƯỢNG SẢN PHẨM(KHÔNG PHẢI LOẠI)
+            int totalItem = 0;
+            for(int i=0; i<Ultils.mangGioHang.size(); i++){
+                totalItem = totalItem + Ultils.mangGioHang.get(i).getSoLuong();
+            }
+            badge.setText(String.valueOf(totalItem));
+        }
+    }
 }

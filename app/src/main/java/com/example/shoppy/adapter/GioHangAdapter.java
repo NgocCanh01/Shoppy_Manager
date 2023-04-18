@@ -1,6 +1,8 @@
 package com.example.shoppy.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import com.example.shoppy.Interface.IImageClickListener;
 import com.example.shoppy.R;
 import com.example.shoppy.model.EventBus.TinhTongEvent;
 import com.example.shoppy.model.GioHang;
+import com.example.shoppy.ultils.Ultils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -58,21 +61,50 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
                     if (gioHangList.get(pos).getSoLuong() > 1) {
                         int soLuongMoi = gioHangList.get(pos).getSoLuong() - 1;
                         gioHangList.get(pos).setSoLuong(soLuongMoi);
+                        //STEP 22: chỉ update tiền khi cộng hoặc trừ(xóa)
+                        holder.tv_item_giohang_soluong.setText(gioHangList.get(pos).getSoLuong() + " ");
+                        long gia = gioHangList.get(pos).getSoLuong() * gioHangList.get(pos).getGiaSp();
+                        holder.tv_item_giohang_giasp2.setText(decimalFormat.format(gia));
+                        //DO HÀM TÍNH TỔNG TIỀN NẰM BÊN GioHang.Activity MÀ SỰ KIỆN CLICK CỘNG TRỪ NẰM BÊN GioHangAdapter
+                        //=> C1:CHUYỂN HÀM TỔNG VỀ PUBLIC
+                        //=> C2: DÙNG THƯ VIỆN EVENTBUS
+                        EventBus.getDefault().postSticky(new TinhTongEvent());//gửi sự kiện qua TinhTongEvent.class
+                    }else if(gioHangList.get(pos).getSoLuong()==1){//STEP 22
+                        AlertDialog.Builder builder = new AlertDialog.Builder(view.getRootView().getContext());
+                        builder.setTitle("Thông báo!");
+                        builder.setMessage("Bạn có muốn xóa sản phẩm này khỏi giỏ hàng không?");
+                        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Ultils.mangGioHang.remove(pos);
+                                notifyDataSetChanged();//Update data
+                                //Sau khi xóa tính tổng lại tiền
+                                EventBus.getDefault().postSticky(new TinhTongEvent());//gửi sự kiện qua TinhTongEvent.class
+
+                            }
+                        });
+                        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        builder.show();
                     }
                 } else if (giatri == 2) {
                     if (gioHangList.get(pos).getSoLuong() < 11) {
                         int soLuongMoi = gioHangList.get(pos).getSoLuong() + 1;
                         gioHangList.get(pos).setSoLuong(soLuongMoi);
                     }
-
+                    holder.tv_item_giohang_soluong.setText(gioHangList.get(pos).getSoLuong() + " ");
+                    long gia = gioHangList.get(pos).getSoLuong() * gioHangList.get(pos).getGiaSp();
+                    holder.tv_item_giohang_giasp2.setText(decimalFormat.format(gia));
+                    //DO HÀM TÍNH TỔNG TIỀN NẰM BÊN GioHang.Activity MÀ SỰ KIỆN CLICK CỘNG TRỪ NẰM BÊN GioHangAdapter
+                    //=> C1:CHUYỂN HÀM TỔNG VỀ PUBLIC
+                    //=> C2: DÙNG THƯ VIỆN EVENTBUS
+                    EventBus.getDefault().postSticky(new TinhTongEvent());//gửi sự kiện qua TinhTongEvent.class
                 }
-                holder.tv_item_giohang_soluong.setText(gioHangList.get(pos).getSoLuong() + " ");
-                long gia = gioHangList.get(pos).getSoLuong() * gioHangList.get(pos).getGiaSp();
-                holder.tv_item_giohang_giasp2.setText(decimalFormat.format(gia));
-                //DO HÀM TÍNH TỔNG TIỀN NẰM BÊN GioHang.Activity MÀ SỰ KIỆN CLICK CỘNG TRỪ NẰM BÊN GioHangAdapter
-                //=> C1:CHUYỂN HÀM TỔNG VỀ PUBLIC
-                //=> C2: DÙNG THƯ VIỆN EVENTBUS
-                EventBus.getDefault().postSticky(new TinhTongEvent());//gửi sự kiện qua TinhTongEvent.class
+
             }
 
             });

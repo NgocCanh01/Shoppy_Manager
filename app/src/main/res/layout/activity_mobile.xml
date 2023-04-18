@@ -10,8 +10,9 @@
         android:id="@+id/toolbarDT"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#B2B4C1"
+        android:background="@color/appbar_color"
         app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white"
         app:title="Điện thoại"></androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView

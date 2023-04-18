@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="red">#F80404</color>
+    <color name="appbar_color">#fe9f21</color>
+    <color name="bg_appbarbutton">#FF8F00</color>
 </resources>

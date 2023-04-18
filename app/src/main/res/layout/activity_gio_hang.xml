@@ -19,10 +19,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.Toolbar
+        app:titleTextColor="@color/white"
         android:id="@+id/toolbarGioHang"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#BDBDA5"
+        android:background="@color/appbar_color"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Giỏ hàng" />
 
@@ -78,7 +79,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         android:text="Mua hàng"
-        android:backgroundTint="#FF8F00"
+        android:backgroundTint="@color/bg_appbarbutton"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

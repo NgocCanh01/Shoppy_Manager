@@ -20,6 +20,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import io.paperdb.Paper;
+
 public class RegisterActivity extends AppCompatActivity {
 
         TextView gaveAccount;
@@ -35,6 +37,9 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        //thêm
+//        Paper.init(this);
+
         gaveAccount = findViewById(R.id.gaveAccount);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         inputEmail = findViewById(R.id.inputEmail);
@@ -44,6 +49,12 @@ public class RegisterActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
+
+        //thêm
+//        if(Paper.book().read("email")!=null&&Paper.book().read("password")!=null){
+//            inputEmail.setText(Paper.book().read("email"));
+//            inputPassword.setText(Paper.book().read("password"));
+//        }
 
 
         gaveAccount.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 PerforAuth();
             }
         });
@@ -75,6 +87,9 @@ public class RegisterActivity extends AppCompatActivity {
         {
             inputConfirmPassword.setError("Password not match both fields");
         }else{
+
+//            Paper.book().write("email",email);
+//            Paper.book().write("password",password);
 
             progressDialog.setMessage("Please wait while Registration .....");
             progressDialog.setTitle("Registration");

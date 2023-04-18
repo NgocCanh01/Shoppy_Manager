@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         STEP 17: ĐẨY DATA VÀO MÀN HÌNH CHI TIẾT
         STEP 18: THÊM SP VÀO GIỎ HÀNG
         STEP 19 20 21: GIAO DIỆN MÀN HÌNH GIỎ HÀNG, ĐẨY DATA VÀO MÀN HÌNH GIỎ HÀNG, TĂNG GIẢM TỔNG TIỀN GIỎ HÀNG
+        STEP 22: XÓA SẢN PHẨM GIỎ HÀNG VÀ MÀN HÌNH ĐĂNG KÍ: muốn lưu trữ thông tin mua khách hàng cần có đăng kí, đăng nhập
+        STEP 23(29): GIAO DIỆN MÀN HÌNH ĐẶT HÀNG
      */
     Toolbar toolbar;
     ViewFlipper viewFlipper;
