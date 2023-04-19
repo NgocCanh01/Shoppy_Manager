@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shoppy.R;
+import com.example.shoppy.ultils.EmailSingleton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -31,14 +32,12 @@ public class RegisterActivity extends AppCompatActivity {
         ProgressDialog progressDialog;
         FirebaseAuth mAuth;
         FirebaseUser mUser;
+        String email,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-        //thêm
-//        Paper.init(this);
 
         gaveAccount = findViewById(R.id.gaveAccount);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -49,13 +48,6 @@ public class RegisterActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
-
-        //thêm
-//        if(Paper.book().read("email")!=null&&Paper.book().read("password")!=null){
-//            inputEmail.setText(Paper.book().read("email"));
-//            inputPassword.setText(Paper.book().read("password"));
-//        }
-
 
         gaveAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,13 +61,15 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 PerforAuth();
+
             }
         });
     }
 
     private void PerforAuth() {
-        String email = inputEmail.getText().toString();
-        String password = inputPassword.getText().toString();
+        email = inputEmail.getText().toString();
+
+        password = inputPassword.getText().toString();
         String confirmPassword = inputConfirmPassword.getText().toString();
 
         if(!email.matches(emailPattern)){
@@ -87,10 +81,6 @@ public class RegisterActivity extends AppCompatActivity {
         {
             inputConfirmPassword.setError("Password not match both fields");
         }else{
-
-//            Paper.book().write("email",email);
-//            Paper.book().write("password",password);
-
             progressDialog.setMessage("Please wait while Registration .....");
             progressDialog.setTitle("Registration");
             progressDialog.setCanceledOnTouchOutside(false);
@@ -120,5 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-    }
+
+
+        }
 }

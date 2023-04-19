@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
         STEP 18: THÊM SP VÀO GIỎ HÀNG
         STEP 19 20 21: GIAO DIỆN MÀN HÌNH GIỎ HÀNG, ĐẨY DATA VÀO MÀN HÌNH GIỎ HÀNG, TĂNG GIẢM TỔNG TIỀN GIỎ HÀNG
         STEP 22: XÓA SẢN PHẨM GIỎ HÀNG VÀ MÀN HÌNH ĐĂNG KÍ: muốn lưu trữ thông tin mua khách hàng cần có đăng kí, đăng nhập
-        STEP 23(29): GIAO DIỆN MÀN HÌNH ĐẶT HÀNG
+        STEP 23(28): GIAO DIỆN MÀN HÌNH ĐẶT HÀNG
+        STEP 24: XỬ LÍ NÚT THANH TOÁN GIỎ HÀNG
      */
     Toolbar toolbar;
     ViewFlipper viewFlipper;
@@ -73,13 +74,13 @@ public class MainActivity extends AppCompatActivity {
     SanPhamMoiAdapter spAdapter;
     NotificationBadge badge;
     FrameLayout frameLayout;
+//    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         apiBanHang = RetrofitClient.getInstance(Ultils.BASE_URL).create(ApiBanHang.class);
-
         anhXa();
         actionBar();
         //STEP 2:
@@ -220,11 +221,14 @@ public class MainActivity extends AppCompatActivity {
             }
             badge.setText(String.valueOf(totalItem));
         }
+//        Intent getEmail = getIntent();
+
         frameLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent giohang = new Intent(getApplicationContext(),GioHangActivity.class);
                 startActivity(giohang);
+
             }
         });
 

@@ -14,11 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shoppy.R;
+import com.example.shoppy.ultils.EmailSingleton;
+import com.example.shoppy.ultils.Ultils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.io.Serializable;
 
 import io.paperdb.Paper;
 
@@ -32,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseUser mUser;
+    String email, password;
 
 
     @Override
@@ -86,8 +91,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void perforLogin() {
-        String email = inputEmail.getText().toString();
-        String password = inputPassword.getText().toString();
+        email = inputEmail.getText().toString();
+        password = inputPassword.getText().toString();
+        EmailSingleton.getInstance().setEmail(email);
 
         if (!email.matches(emailPattern)) {
             inputEmail.setError("Enter Connext Email");
@@ -125,8 +131,19 @@ public class LoginActivity extends AppCompatActivity {
          }
 
     private void sendUserToNextActivity() {
+
+
+
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+
+        //Sửa gửi email qua màn hình thanh toán
+//        Intent sendEmail = new Intent(LoginActivity.this,ThanhToanActivity.class);
+//        Bundle bundle = new Bundle();
+//        bundle.putString(Ultils.KEY_GET_EMAIL,email);
+//        sendEmail.putExtras(bundle);
+//        startActivity(sendEmail);
+
     }
 }
