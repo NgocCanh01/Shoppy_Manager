@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
     NotificationBadge badge;
     FrameLayout frameLayout;
 //    String email;
+    ImageView imgSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +117,10 @@ public class MainActivity extends AppCompatActivity {
                         laptop.putExtra("loai", 2);//STEP 14
                         startActivity(laptop);
                         break;
+                    case 5:
+                        Intent donmua = new Intent(getApplicationContext(), XemDonActivity.class);
+                        startActivity(donmua);
+                        break;
                 }
             }
         });
@@ -152,6 +158,9 @@ public class MainActivity extends AppCompatActivity {
                                 loaiSpAdapter = new LoaiSpAdapter(getApplicationContext(), mangLoaiSp);
                                 listViewMain.setAdapter(loaiSpAdapter);
                             }
+                        },throwable -> {//TỰ THÊM
+                            Toast.makeText(getApplicationContext(), "Không lấy được sản phẩm", Toast.LENGTH_LONG).show();
+
                         }
 
                 ));
@@ -202,6 +211,9 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayoutMain);
         badge = findViewById(R.id.menu_soLuong);
         frameLayout = findViewById(R.id.frameGioHang);
+        imgSearch = findViewById(R.id.imgSearch);
+
+
 
         //STEP 2:
         //Khởi tạo list
@@ -229,6 +241,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent giohang = new Intent(getApplicationContext(),GioHangActivity.class);
                 startActivity(giohang);
 
+            }
+        });
+        //STEP 34:
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),SearchActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -26,24 +26,28 @@ import io.paperdb.Paper;
 public class RegisterActivity extends AppCompatActivity {
 
         TextView gaveAccount;
-        EditText inputEmail, inputPassword, inputConfirmPassword;
+        EditText inputEmail, inputPassword, inputConfirmPassword, inputSdt;
         Button btnRegister;
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         ProgressDialog progressDialog;
         FirebaseAuth mAuth;
         FirebaseUser mUser;
-        String email,password;
+        String email,password,mobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        //THÊM
+        Paper.init(this);
+
         gaveAccount = findViewById(R.id.gaveAccount);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         inputEmail = findViewById(R.id.inputEmail);
         inputPassword = findViewById(R.id.inputPassword);
         inputConfirmPassword = findViewById(R.id.inputConfirmPassword);
+        inputSdt = findViewById(R.id.inputSodienthoai);
         btnRegister = findViewById(R.id.btnRegister);
         progressDialog = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
@@ -55,6 +59,12 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             }
         });
+        //thêm sửa sdt
+//        if(Paper.book().read("sdt")!=null){
+//            inputSdt.setText(Paper.book().read("sdt"));
+//        }
+
+
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,9 +78,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void PerforAuth() {
         email = inputEmail.getText().toString();
-
         password = inputPassword.getText().toString();
+        mobile = inputSdt.getText().toString();
+        EmailSingleton.getInstance().setEmail(email);
+        EmailSingleton.getInstance().setMobile(mobile);
         String confirmPassword = inputConfirmPassword.getText().toString();
+        Paper.book().write("sdt",mobile);
+//        Paper.book().write("email",email);
 
         if(!email.matches(emailPattern)){
             inputEmail.setError("Enter Connext Email");
@@ -110,7 +124,5 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-
-
         }
 }

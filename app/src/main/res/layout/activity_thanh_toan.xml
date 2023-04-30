@@ -46,10 +46,10 @@
 
                 <TextView
                     android:id="@+id/tvGiaTien"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="25.000"
+                    android:layout_gravity="center"
+                    android:hint="25.000"
                     android:textColor="@color/red"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -77,10 +77,10 @@
 
                 <TextView
                     android:id="@+id/tvSdt"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0963442085"
+                    android:layout_gravity="center"
+                    android:hint="0963442085"
                     android:textColor="@color/red"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -108,10 +108,10 @@
 
                 <TextView
                     android:id="@+id/tvEmail"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="canhdao2001@gmail.com"
+                    android:layout_gravity="center"
+                    android:hint="canhdao2001@gmail.com"
                     android:textColor="@color/red"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -151,11 +151,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:background="@color/bg_appbarbutton"
         android:text="Đặt hàng"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/inputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

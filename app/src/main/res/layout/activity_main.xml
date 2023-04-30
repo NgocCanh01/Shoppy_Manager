@@ -23,26 +23,39 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/appbar_color"
                 app:title="Trang chính">
-                <FrameLayout
-                    android:id="@+id/frameGioHang"
-                    android:layout_width="55dp"
-                    android:layout_height="?attr/actionBarSize"
+                <LinearLayout
                     android:layout_gravity="right"
-                    android:layout_marginRight="10dp">
-
-                    <com.nex3z.notificationbadge.NotificationBadge
-                        android:id="@+id/menu_soLuong"
-                        android:textColor="@color/white"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:layout_gravity="top|right" />
-
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize">
                     <ImageView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginTop="15dp"
-                        android:src="@drawable/ic_cart" />
-                </FrameLayout>
+                        android:id="@+id/imgSearch"
+                        android:layout_marginRight="15dp"
+                        android:src="@drawable/ic_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="?attr/actionBarSize"/>
+                    <FrameLayout
+                        android:id="@+id/frameGioHang"
+                        android:layout_width="55dp"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_marginRight="10dp">
+
+                        <com.nex3z.notificationbadge.NotificationBadge
+                            android:id="@+id/menu_soLuong"
+                            android:textColor="@color/white"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_gravity="top|right" />
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="15dp"
+                            android:src="@drawable/ic_cart" />
+                    </FrameLayout>
+
+                </LinearLayout>
+
             </androidx.appcompat.widget.Toolbar>
 
             <ViewFlipper

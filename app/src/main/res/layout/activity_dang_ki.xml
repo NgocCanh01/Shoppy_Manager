@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context=".activities.RegisterActivity">
+    tools:context=".activities.DangKiActivity">
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -86,6 +86,31 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 app:layout_editor_absoluteX="97dp"
                 app:layout_editor_absoluteY="248dp" />
+            <EditText
+                android:id="@+id/inputUserName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/input_bg"
+                android:drawableLeft="@drawable/ic_person"
+                android:drawablePadding="10dp"
+                android:ems="10"
+                android:hint="UserName"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="20dp"
+                android:paddingTop="13dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="13dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inputEmail"
+                app:layout_editor_absoluteX="97dp"
+                app:layout_editor_absoluteY="248dp" />
 
             <EditText
                 android:id="@+id/inputSodienthoai"
@@ -109,7 +134,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputEmail"
+                app:layout_constraintTop_toBottomOf="@+id/inputUserName"
                 app:layout_constraintBottom_toTopOf="@+id/inputPassword"
                 app:layout_editor_absoluteX="97dp"
                 app:layout_editor_absoluteY="248dp" />

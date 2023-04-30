@@ -1,6 +1,7 @@
 package com.example.shoppy.ultils;
 
 import com.example.shoppy.model.GioHang;
+import com.example.shoppy.model.User;
 
 import java.util.List;
 
@@ -9,4 +10,5 @@ public class Ultils {
     //chú ý ip có thể thay đổi, vào cmd -> ipconfig -> copy ipv4
     public static List<GioHang> mangGioHang;
     public static final String KEY_GET_EMAIL = "email";
+    public static User user_current = new User();
 }
