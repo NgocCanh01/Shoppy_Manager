@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         STEP 22: XÓA SẢN PHẨM GIỎ HÀNG VÀ MÀN HÌNH ĐĂNG KÍ: muốn lưu trữ thông tin mua khách hàng cần có đăng kí, đăng nhập
         STEP 23(28): GIAO DIỆN MÀN HÌNH ĐẶT HÀNG
         STEP 24: XỬ LÍ NÚT THANH TOÁN GIỎ HÀNG
+        STEP 35: TẠO GIỎ HÀNG CÓ CHECK BOX
      */
     Toolbar toolbar;
     ViewFlipper viewFlipper;

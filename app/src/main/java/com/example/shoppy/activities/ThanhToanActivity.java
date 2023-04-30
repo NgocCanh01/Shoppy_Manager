@@ -51,10 +51,11 @@ public class ThanhToanActivity extends AppCompatActivity {
         initControl();
     }
 
+    //STEP 35: ĐỔI VỀ MẢNG MUA HÀNG
     private void countItem() {
         totalItem = 0;
-        for (int i = 0; i < Ultils.mangGioHang.size(); i++) {
-            totalItem = totalItem + Ultils.mangGioHang.get(i).getSoLuong();
+        for (int i = 0; i < Ultils.mangMuaHang.size(); i++) {
+            totalItem = totalItem + Ultils.mangMuaHang.get(i).getSoLuong();
         }
     }
 
@@ -101,14 +102,16 @@ public class ThanhToanActivity extends AppCompatActivity {
                     String str_email = Ultils.user_current.getEmail();
                     String str_sdt = Ultils.user_current.getMobile();
                     int id = Ultils.user_current.getId();
-                    Log.d("TAG", new Gson().toJson(Ultils.mangGioHang));
+                    Log.d("TAG", new Gson().toJson(Ultils.mangMuaHang));//STEP 35: ĐỔI VỀ MẢNG MUA HÀNG
                     //STEP 31:CẦN XỬ LÍ ĐỂ LẤY ID USER, SĐT, EMAIL
-                    compositeDisposable.add(apiBanHang.createOrder(str_email, str_sdt, String.valueOf(tongTien), id, strDiaChi, totalItem, new Gson().toJson(Ultils.mangGioHang))
+                    compositeDisposable.add(apiBanHang.createOrder(str_email, str_sdt, String.valueOf(tongTien), id, strDiaChi, totalItem, new Gson().toJson(Ultils.mangMuaHang))
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(
                                     userModel -> {
                                         Toast.makeText(getApplicationContext(), "Them don thanh cong", Toast.LENGTH_LONG).show();
+                                        //STEP 35: MUA XONG THÌ CLEAR GIỎ HÀNG
+                                        Ultils.mangMuaHang.clear();
                                         Intent backMain = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(backMain);
                                         finish();
