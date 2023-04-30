@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -82,6 +83,17 @@ public class LoginActivity extends AppCompatActivity {
         if(Paper.book().read("email")!=null&&Paper.book().read("password")!=null){
             inputEmail.setText(Paper.book().read("email"));
             inputPassword.setText(Paper.book().read("password"));
+            if(Paper.book().read("isLogin")!=null){
+                boolean flag = Paper.book().read("isLogin");
+                if(flag){
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                        }
+                    },1000);
+                }
+            }
         }
 
         forgotPassword.setOnClickListener(new View.OnClickListener() {
@@ -182,6 +194,8 @@ public class LoginActivity extends AppCompatActivity {
                     .subscribe(userModel -> {
                         if(userModel.isSuccess()){
                             Ultils.user_current = userModel.getResult().get(0);//do cái result là 1 cái list => lấy ptu first
+                            //Lưu lại thông tin người dùng
+                            Paper.book().write("user",userModel.getResult().get(0));
                             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                             startActivity(intent);
                             finish();

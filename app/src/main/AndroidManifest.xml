@@ -21,6 +21,13 @@
         android:theme="@style/Theme.Shoppy"
         tools:targetApi="33">
         <activity
+            android:name=".activities.LoginActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activities.SearchActivity"
             android:exported="false">
             <meta-data
@@ -112,7 +119,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

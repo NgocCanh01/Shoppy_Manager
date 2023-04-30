@@ -29,6 +29,7 @@ import com.example.shoppy.adapter.LoaiSpAdapter;
 import com.example.shoppy.adapter.SanPhamMoiAdapter;
 import com.example.shoppy.model.LoaiSp;
 import com.example.shoppy.model.SanPhamMoi;
+import com.example.shoppy.model.User;
 import com.example.shoppy.retrofit.ApiBanHang;
 import com.example.shoppy.retrofit.RetrofitClient;
 import com.example.shoppy.ultils.Ultils;
@@ -38,6 +39,7 @@ import com.nex3z.notificationbadge.NotificationBadge;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.paperdb.Paper;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -84,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         apiBanHang = RetrofitClient.getInstance(Ultils.BASE_URL).create(ApiBanHang.class);
+        Paper.init(this);
+        if(Paper.book().read("user")!=null){
+            User user = Paper.book().read("user");
+            Ultils.user_current = user;
+        }
         anhXa();
         actionBar();
         //STEP 2:
@@ -122,6 +129,13 @@ public class MainActivity extends AppCompatActivity {
                         Intent donmua = new Intent(getApplicationContext(), XemDonActivity.class);
                         startActivity(donmua);
                         break;
+                    case 6:
+                        //xoa key user
+                        Paper.book().delete("user");
+                        Intent dangnhap = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(dangnhap);
+                        finish();
+                        break;
                 }
             }
         });
@@ -156,6 +170,8 @@ public class MainActivity extends AppCompatActivity {
                                 //STEP 4
                                 //Thêm data cho list view
                                 mangLoaiSp = loaiSpModel.getResult();//nối data từ loại sp model vào mangLoaiSp
+                                //STEP 36: dang suat
+                                mangLoaiSp.add(new LoaiSp("Đăng xuất",""));
                                 loaiSpAdapter = new LoaiSpAdapter(getApplicationContext(), mangLoaiSp);
                                 listViewMain.setAdapter(loaiSpAdapter);
                             }
