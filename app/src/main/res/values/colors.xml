@@ -11,4 +11,10 @@
     <color name="red">#F80404</color>
     <color name="appbar_color">#fe9f21</color>
     <color name="bg_appbarbutton">#FF8F00</color>
+
+    <color name="text_color">#1E4175</color>
+    <color name="background_color">#ecf0f3</color>
+    <color name="highlight">#ffffff</color>
+    <color name="shadow_color">#d9dbde</color>
+    <color name="ic_color">#F60606</color>
 </resources>

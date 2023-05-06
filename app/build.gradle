@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.shoppy'
+    namespace 'com.example.manager.shoppy'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.shoppy"
+        applicationId "com.example.manager.shoppy"
         minSdk 25
         targetSdk 33
         versionCode 1
@@ -27,6 +27,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildFeatures{
+        viewBinding true
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -36,6 +40,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-auth:21.1.0'
     implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.1.2'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -67,4 +72,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10.1'
     //Loties
     implementation 'com.airbnb.android:lottie:6.0.0'
+    //Neumorphirm
+    implementation 'com.github.fornewid:neumorphism:0.3.2'
+    //Image pick
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
 }
