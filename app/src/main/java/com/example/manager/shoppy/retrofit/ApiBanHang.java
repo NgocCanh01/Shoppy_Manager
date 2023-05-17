@@ -4,6 +4,7 @@ import com.example.manager.shoppy.model.DonHangModel;
 import com.example.manager.shoppy.model.LoaiSpModel;
 import com.example.manager.shoppy.model.MessageModel;
 import com.example.manager.shoppy.model.SanPhamMoiModel;
+import com.example.manager.shoppy.model.ThongKeModel;
 import com.example.manager.shoppy.model.UserModel;
 
 import io.reactivex.rxjava3.core.Observable;
@@ -24,6 +25,9 @@ public interface ApiBanHang {
 
     @GET("getspmoi.php")
     Observable<SanPhamMoiModel> getSpMoi();
+    //thong ke
+    @GET("thongke.php")
+    Observable<ThongKeModel> getThongKe();
 
     //POST DATA
     @POST("chitiet.php")
@@ -114,6 +118,13 @@ public interface ApiBanHang {
     Observable<MessageModel> updateOrder(
             @Field("id") int id,
             @Field("trangthai") int trangthai
+    );
+
+    @POST("gettoken.php")
+    @FormUrlEncoded
+    Observable<UserModel> getToken(
+            @Field("status") int status,
+            @Field("iduser") int iduser
     );
 
     @Multipart

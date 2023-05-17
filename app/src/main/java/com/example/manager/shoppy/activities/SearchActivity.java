@@ -34,6 +34,7 @@ public class SearchActivity extends AppCompatActivity {
     List<SanPhamMoi> sanPhamMoiList;
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +61,11 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length()==0){
+                if (s.length() == 0) {
                     sanPhamMoiList.clear();
-                    adapterDt = new DienThoaiAdapter(getApplicationContext(),sanPhamMoiList);
+                    adapterDt = new DienThoaiAdapter(getApplicationContext(), sanPhamMoiList);
                     recyclerViewSearch.setAdapter(adapterDt);
-                }else {
+                } else {
                     getDataSearch(s.toString());
                 }
 
@@ -83,14 +84,18 @@ public class SearchActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(sanPhamMoiModel -> {
-                  if(sanPhamMoiModel.isSuccess()){
-                      sanPhamMoiList = sanPhamMoiModel.getResult();
-                      adapterDt = new DienThoaiAdapter(getApplicationContext(),sanPhamMoiList);
-                      recyclerViewSearch.setAdapter(adapterDt);
-                  }
-                },
+                            if (sanPhamMoiModel.isSuccess()) {
+                                sanPhamMoiList = sanPhamMoiModel.getResult();
+                                adapterDt = new DienThoaiAdapter(getApplicationContext(), sanPhamMoiList);
+                                recyclerViewSearch.setAdapter(adapterDt);
+                            } else {
+                                Toast.makeText(getApplicationContext(), sanPhamMoiModel.getMessage(), Toast.LENGTH_LONG).show();
+                                sanPhamMoiList.clear();
+                                adapterDt.notifyDataSetChanged();
+                            }
+                        },
                         throwable -> {
-                            Toast.makeText(getApplicationContext(),throwable.getMessage(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), throwable.getMessage(), Toast.LENGTH_LONG).show();
                         }
                 ));
     }

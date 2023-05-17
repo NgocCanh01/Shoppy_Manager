@@ -203,6 +203,14 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(quanli);
                         break;
                     case 15:
+                        Intent chat = new Intent(getApplicationContext(), UserActivity.class);
+                        startActivity(chat);
+                        break;
+                    case 16:
+                        Intent thongke = new Intent(getApplicationContext(), ThongKeActivity.class);
+                        startActivity(thongke);
+                        break;
+                    case 17:
                         //xoa key user
                         Paper.book().delete("user");
                         //signout
@@ -246,8 +254,10 @@ public class MainActivity extends AppCompatActivity {
                                 //Thêm data cho list view
                                 mangLoaiSp = loaiSpModel.getResult();//nối data từ loại sp model vào mangLoaiSp
                                 //STEP 36: dang suat
-                                mangLoaiSp.add(new LoaiSp("Quản lí",""));
-                                mangLoaiSp.add(new LoaiSp("Đăng xuất",""));
+                                mangLoaiSp.add(new LoaiSp("Quản lí","https://kiemthecaomienphi.files.wordpress.com/2023/05/manage.png?fbclid=IwAR2BKVrLn2vhGD0WDL-3w-BM6JFr47RnCBkdRzzWjX93dTHCRIeGI4jDJgw"));
+                                mangLoaiSp.add(new LoaiSp("Chat","https://kiemthecaomienphi.files.wordpress.com/2023/05/chat.png?fbclid=IwAR2qbM28btOk8PViChB2Kyv2kh9x3U9i09YVAwF4fCyULRkadAC0VVlU27Q"));
+                                mangLoaiSp.add(new LoaiSp("Thống kê","https://kiemthecaomienphi.files.wordpress.com/2023/05/analysis.png?fbclid=IwAR2OK1a84o_H8WwO5CvyPA0Q3z1kQwthGXjToRvXkovJUiRuJugauuUv2t0"));
+                                mangLoaiSp.add(new LoaiSp("Đăng xuất","https://kiemthecaomienphi.files.wordpress.com/2023/05/14_log_out.png?fbclid=IwAR18cxKVjEfYjJ-4LOjc9pcH01C7JYCBDrO9N_ypT0d42A1_ad91Zxscdr8"));
                                 loaiSpAdapter = new LoaiSpAdapter(getApplicationContext(), mangLoaiSp);
                                 listViewMain.setAdapter(loaiSpAdapter);
                             }

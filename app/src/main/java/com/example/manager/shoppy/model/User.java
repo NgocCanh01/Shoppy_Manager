@@ -6,6 +6,18 @@ public class User {
     String pass;
     String username;
     String mobile;
+    String token;
+
+    public User() {
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getUid() {
         return uid;

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ChatActivity">
+    <LinearLayout
+        android:weightSum="10"
+        android:id="@+id/line_chat"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_weight="8"
+            android:id="@+id/edtInputText"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
+            android:hint="Nội dung chat"
+            android:textColorHint="@color/white"
+            android:layout_width="0dp"
+            android:background="@drawable/background_input_text"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/imgChat"
+            android:src="@drawable/ic_send"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            app:tint="@color/appbar_color"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleChat"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/line_chat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

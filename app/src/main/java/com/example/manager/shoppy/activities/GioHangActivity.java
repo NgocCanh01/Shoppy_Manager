@@ -35,6 +35,9 @@ public class GioHangActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gio_hang);
         initView();
         initControl();
+        if(Ultils.mangMuaHang!=null){
+            Ultils.mangMuaHang.clear();
+        }
         tinhTongTien();
     }
 

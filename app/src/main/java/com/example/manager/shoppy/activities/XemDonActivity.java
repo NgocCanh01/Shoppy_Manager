@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,10 +18,13 @@ import android.widget.Toast;
 
 import com.example.manager.shoppy.model.DonHang;
 import com.example.manager.shoppy.model.EventBus.DonHangEvent;
+import com.example.manager.shoppy.model.NotiSendData;
 import com.example.manager.shoppy.retrofit.ApiBanHang;
+import com.example.manager.shoppy.retrofit.ApiPushNotification;
 import com.example.manager.shoppy.retrofit.RetrofitClient;
 import com.example.manager.shoppy.R;
 import com.example.manager.shoppy.adapter.DonHangAdapter;
+import com.example.manager.shoppy.retrofit.RetrofitClientNoti;
 import com.example.manager.shoppy.ultils.Ultils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -28,7 +32,9 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -148,11 +154,65 @@ public class XemDonActivity extends AppCompatActivity {
                     //sau khi update trang thai chay lai ham
                     getOrder();
                     dialog.dismiss();//chon xong dong lai
+                    pushNotiUser();
                 },
                         throwable -> {
 
                         }));
     }
+
+    private void pushNotiUser() {
+        //get Token tren server
+        compositeDisposable.add(apiBanHang.getToken(0,donHang.getIduser())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(userModel -> {
+                            for (int i = 0; i < userModel.getResult().size(); i++) {
+                                Map<String, String> data = new HashMap<>();
+                                data.put("title", "thong bao");
+                                data.put("body",trangThaiDon(trangThai));
+                                NotiSendData notiSendData = new NotiSendData(userModel.getResult().get(i).getToken(), data);
+                                ApiPushNotification apiPushNotification = RetrofitClientNoti.getInstance().create(ApiPushNotification.class);
+                                compositeDisposable.add(apiPushNotification.sendNotification(notiSendData)
+                                        .subscribeOn(Schedulers.io())
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .subscribe(
+                                                notiResponse -> {
+
+                                                },
+                                                throwable -> {
+                                                    Log.d("logg", throwable.getMessage());
+                                                }
+                                        ));
+                            }
+                        }, throwable -> {
+                            Log.d("logg", throwable.getMessage());
+                        }
+                ));
+    }
+
+    private String trangThaiDon(int status){
+        String result="";
+        switch (status){
+            case 0:
+                result = "Đơn hàng đang được xử lí";
+                break;
+            case 1:
+                result = "Đơn hàng đã chấp nhận và đang bàn giao cho đơn vị vận chuyển";
+                break;
+            case 2:
+                result = "Đơn hàng đã giao cho đơn vị vận chuyển";
+                break;
+            case 3:
+                result = "Thành công";
+                break;
+            case 4:
+                result = "Đơn hàng đã hủy";
+                break;
+        }
+        return result;
+    }
+
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void eventDonHang(DonHangEvent event){
