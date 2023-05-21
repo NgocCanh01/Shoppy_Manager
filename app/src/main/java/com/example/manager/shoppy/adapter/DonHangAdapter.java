@@ -32,23 +32,24 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_donhang,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_donhang, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         DonHang donHang = listDonHang.get(position);
-        holder.tvDonHang.setText("Đơn hàng: "+donHang.getId());
+        holder.tvDonHang.setText("Đơn hàng: " + donHang.getId());
+        holder.diachi.setText("Địa chỉ: " + donHang.getDiachi());
         holder.trangthai.setText(tinhTrangDon(donHang.getTrangthai()));
         LinearLayoutManager layoutManager = new LinearLayoutManager(
-          holder.recyclerViewChiTiet.getContext(),
-          LinearLayoutManager.VERTICAL,
-          false
+                holder.recyclerViewChiTiet.getContext(),
+                LinearLayoutManager.VERTICAL,
+                false
         );
         layoutManager.setInitialPrefetchItemCount(donHang.getItem().size());
         //adapter chitiet
-        ChiTietAdapter chiTietAdapter = new ChiTietAdapter(context,donHang.getItem());
+        ChiTietAdapter chiTietAdapter = new ChiTietAdapter(context, donHang.getItem());
         holder.recyclerViewChiTiet.setLayoutManager(layoutManager);
         holder.recyclerViewChiTiet.setAdapter(chiTietAdapter);
         holder.recyclerViewChiTiet.setRecycledViewPool(viewPool);
@@ -57,7 +58,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
             @Override
             public void onClick(View view, int pos, boolean isLongClick) {
                 //ktra event onLong cho chac
-                if(isLongClick){
+                if (isLongClick) {
                     //gui toan bo don hang qua
                     //cần EventBus : DonHangEvent=> post đơn hàng qua màn hình XemDon để perform
                     EventBus.getDefault().postSticky(new DonHangEvent(donHang));
@@ -67,9 +68,9 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
         });
     }
 
-    private String tinhTrangDon(int status){
-        String result="";
-        switch (status){
+    private String tinhTrangDon(int status) {
+        String result = "";
+        switch (status) {
             case 0:
                 result = "Đơn hàng đang được xử lí";
                 break;
@@ -95,13 +96,15 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
-        TextView tvDonHang,trangthai;
+        TextView tvDonHang, trangthai, diachi;
         RecyclerView recyclerViewChiTiet;
         ItemClickListener listener;//STEP 46
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDonHang = itemView.findViewById(R.id.idDonHang);
             trangthai = itemView.findViewById(R.id.trangThai);
+            diachi = itemView.findViewById(R.id.diachi_donhang);
             recyclerViewChiTiet = itemView.findViewById(R.id.recycleview_ChiTiet);
             itemView.setOnLongClickListener(this);
         }
@@ -112,7 +115,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.MyViewHo
 
         @Override
         public boolean onLongClick(View view) {
-            listener.onClick(view,getAdapterPosition(),true);
+            listener.onClick(view, getAdapterPosition(), true);
             return false;
         }
     }

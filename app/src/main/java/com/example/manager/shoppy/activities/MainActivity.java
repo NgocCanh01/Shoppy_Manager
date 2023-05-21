@@ -325,6 +325,11 @@ public class MainActivity extends AppCompatActivity {
 //        Khởi tạo Adapter
 //        loaiSpAdapter = new LoaiSpAdapter(getApplicationContext(), mangLoaiSps);
 //        lvMain.setAdapter(loaiSpAdapter);
+
+        //62
+        if(Paper.book().read("so_spgiohang")!=null){
+            Ultils.mangGioHang = Paper.book().read("so_spgiohang");
+        }
         //STEP 18:
         if(Ultils.mangGioHang == null){
             Ultils.mangGioHang = new ArrayList<>();

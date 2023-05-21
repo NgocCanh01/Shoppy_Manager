@@ -37,6 +37,15 @@
                     android:layout_height="wrap_content"/>
 
             </LinearLayout>
+            <TextView
+                android:id="@+id/diachi_donhang"
+                android:layout_margin="10dp"
+                android:text="Địa chỉ: "
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleview_ChiTiet"

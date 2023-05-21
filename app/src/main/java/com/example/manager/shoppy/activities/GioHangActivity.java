@@ -78,7 +78,7 @@ public class GioHangActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),ThanhToanActivity.class);
                 intent.putExtra("tongtien",tongTienSp);//STEP 23(29)
                 //STEP 35: MUA XONG ĐƠN HÀNG THÌ CLEAR NÓ ĐI
-                Ultils.mangGioHang.clear();
+//                Ultils.mangGioHang.clear();//62
                 startActivity(intent);
             }
         });

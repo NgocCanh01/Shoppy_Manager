@@ -22,6 +22,8 @@ import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.text.DecimalFormat;
 
+import io.paperdb.Paper;
+
 public class ChiTietActivity extends AppCompatActivity {
     TextView tvTenSp, tvGiaSp, tvMoTaChiTiet;
     Button btnThemGioHang;
@@ -46,6 +48,9 @@ public class ChiTietActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 themGioHang();//STEP 18:
+
+                //62
+                Paper.book().write("so_spgiohang",Ultils.mangGioHang);
             }
         });
     }

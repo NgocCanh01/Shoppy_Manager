@@ -95,7 +95,7 @@ public class DangKiActivity extends AppCompatActivity {
 
     private void postData(String str_email,String str_pass,String str_username,String str_mobile,String uid){
         //post data
-        compositeDisposable.add(apiBanHang.dangKi(str_email, str_pass, str_username, str_mobile,uid)
+        compositeDisposable.add(apiBanHang.dangKi(str_email, "onfirebase", str_username, str_mobile,uid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(userModel -> {

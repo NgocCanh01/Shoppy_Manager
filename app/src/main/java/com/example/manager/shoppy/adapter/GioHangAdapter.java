@@ -27,6 +27,8 @@ import org.greenrobot.eventbus.EventBus;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import io.paperdb.Paper;
+
 public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHolder> {
     Context context;
     List<GioHang> gioHangList;
@@ -57,13 +59,17 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
         //STEP 35:
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    Ultils.mangMuaHang.add(gioHang);//sau khi được check
+            public void onCheckedChanged(CompoundButton buttonView, boolean checked) {
+                if(checked){
+                    Ultils.mangGioHang.get(holder.getAdapterPosition()).setChecked(true);
+                    if(!Ultils.mangMuaHang.contains(gioHang)){
+                        Ultils.mangMuaHang.add(gioHang);//sau khi được check//62
+                    }
                     //Tinhs tien
                     EventBus.getDefault().postSticky(new TinhTongEvent());//gửi sự kiện qua TinhTongEvent.class
                 }else {
                     //duyệt mảng mua hàng
+                    Ultils.mangGioHang.get(holder.getAdapterPosition()).setChecked(false);
                     for(int i = 0; i<Ultils.mangMuaHang.size(); i++){
                         if(Ultils.mangMuaHang.get(i).getIdSp()==gioHang.getIdSp()){
                             Ultils.mangMuaHang.remove(i);
@@ -75,6 +81,8 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
                 }
             }
         });
+        //Lấy những gì đã có gán ngược lại//62
+        holder.checkBox.setChecked(gioHang.isChecked());
 
         //STEP 21:
         holder.setListener(new IImageClickListener() {
@@ -100,7 +108,11 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
                         builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                Ultils.mangMuaHang.remove(gioHang);
                                 Ultils.mangGioHang.remove(pos);
+
+                                //62
+                                Paper.book().write("so_spgiohang",Ultils.mangGioHang);
                                 notifyDataSetChanged();//Update data
                                 //Sau khi xóa tính tổng lại tiền
                                 EventBus.getDefault().postSticky(new TinhTongEvent());//gửi sự kiện qua TinhTongEvent.class

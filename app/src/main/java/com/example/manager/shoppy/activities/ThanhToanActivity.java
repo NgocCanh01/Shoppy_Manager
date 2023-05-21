@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.manager.shoppy.model.GioHang;
 import com.example.manager.shoppy.retrofit.ApiBanHang;
 import com.example.manager.shoppy.retrofit.RetrofitClient;
 import com.example.manager.shoppy.R;
@@ -21,6 +22,7 @@ import com.google.gson.Gson;
 
 import java.text.DecimalFormat;
 
+import io.paperdb.Paper;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -107,7 +109,15 @@ public class ThanhToanActivity extends AppCompatActivity {
                                     userModel -> {
                                         Toast.makeText(getApplicationContext(), "Them don thanh cong", Toast.LENGTH_LONG).show();
                                         //STEP 35: MUA XONG THÌ CLEAR GIỎ HÀNG
+                                        //62 clear mangGioHang
+                                        for(int i= 0; i<Ultils.mangMuaHang.size(); i++){
+                                            GioHang gioHang = Ultils.mangMuaHang.get(i);
+                                            if(Ultils.mangGioHang.contains(gioHang)){
+                                                Ultils.mangGioHang.remove(gioHang);
+                                            }
+                                        }
                                         Ultils.mangMuaHang.clear();
+                                        Paper.book().write("so_spgiohang",Ultils.mangGioHang);
                                         Intent backMain = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(backMain);
                                         finish();

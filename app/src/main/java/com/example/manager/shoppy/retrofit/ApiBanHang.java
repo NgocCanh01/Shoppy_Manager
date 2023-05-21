@@ -1,5 +1,7 @@
 package com.example.manager.shoppy.retrofit;
 
+import android.util.JsonReader;
+
 import com.example.manager.shoppy.model.DonHangModel;
 import com.example.manager.shoppy.model.LoaiSpModel;
 import com.example.manager.shoppy.model.MessageModel;
@@ -24,6 +26,7 @@ public interface ApiBanHang {
     Observable<LoaiSpModel> getLoaiSp();
 
     @GET("getspmoi.php")
+
     Observable<SanPhamMoiModel> getSpMoi();
     //thong ke
     @GET("thongke.php")
@@ -98,7 +101,7 @@ public interface ApiBanHang {
     @POST("updatesp.php")
     @FormUrlEncoded
     Observable<MessageModel> updateSp(
-            @Field("tensanpham") String tensanpham,
+    @Field("tensanpham") String tensanpham,
             @Field("giasp") String giasp,
             @Field("hinhanh") String hinhanh,
             @Field("mota") String mota,
